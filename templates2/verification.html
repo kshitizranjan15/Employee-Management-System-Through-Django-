@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <!-- Bootstrap CSS Link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <style>
+        .container {
+            margin-top: 100px;
+        }
+
+        .otp-input {
+            width: 50px;
+            text-align: center;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        .otp-input:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center">
+        <h2>OTP Verification</h2>
+        <p>An OTP has been sent to your email. Please enter the OTP below:</p>
+        <div class="form-group d-flex justify-content-center">
+            <input type="text" class="form-control otp-input" maxlength="1" required>
+            <input type="text" class="form-control otp-input" maxlength="1" required>
+            <input type="text" class="form-control otp-input" maxlength="1" required>
+            <input type="text" class="form-control otp-input" maxlength="1" required>
+        </div>
+        <button class="btn btn-light mt-4 custom-button">Verify</button>
+        <p class="text-primary mt-2">   
+    </div>
+
+    <!-- Bootstrap JS and Popper.js Scripts (Required for Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

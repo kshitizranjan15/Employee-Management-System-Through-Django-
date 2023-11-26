@@ -1,0 +1,375 @@
+<!-- <!DOCTYPE html>
+<html>
+{% load static %}
+  <head>
+    <link rel="stylesheet" href="/static/css/style.css" >
+  </head>
+  <title>Employee</title>
+  <body>
+    <div class="employee">
+      <div class="div">
+        <div class="left-navigation">
+          <div class="selected"><img class="icon-chart" src="/static/img/home-2-svgrepo-com.svg" /></div>
+          <div class="overlap-group"><img class="ellipse" src="/static/img/circled-user-svgrepo-com.svg" /></div>
+          <img class="icon-folders" src="/static/img/folder-svgrepo-com.svg" />
+          <img class="icon-mail" src="/static/img/mail-open-svgrepo-com.svg" />
+        </div>
+        <div class="overlap">
+          <div class="topbar">
+            <a href="/logout"><img class="icon-logout" src="/static/img/logout.png" /></a>
+          </div>
+          <div class="button-manage">
+            <div class="overlap-2">
+              <img class="icon-edit" src="/static/img/edit-svgrepo-com.svg" />
+              <div class="text-wrapper">Manage Employees</div>
+            </div>
+          </div>
+          <div class="topbar-2">
+          
+          </div>
+        </div>
+        <div class="overlap-3">
+          <div class="text-wrapper-2">Welcome, {{name}}</div>
+        </div>
+        <div class="text-wrapper-3">{{designation}}</div>
+        <a href='/employee/ask_hr'>
+          <div class="active-cases">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Ask HR</div>
+              <div class="text-wrapper-5">Send your queries</div>
+              <img class="img" src="/static/img/askhr.png" />
+            </div>
+          </div>
+        </a>
+        <a href='/employee/feedback'>
+          <div class="vaccine-administered">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Feedback</div>
+              <div class="text-wrapper-5">Write a feedback</div>
+              <img class="img" src="/static/img/feedback.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/employee/leaverequest'>
+          <div class="vaccination-per-day">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Apply Leave</div>
+              <div class="text-wrapper-5">Apply for a leave request to your Manager</div>
+              <img class="img" src="/static/img/leaves.svg" />
+            </div>
+          </div>
+        </a>
+        <div class="leaves-card">
+          <div class="overlap-5">
+            <div class="shadow"></div>
+            <div class="base"></div>
+            <div id="piechart"></div> 
+            <div class="text-wrapper-leaves"><table>
+              <tr>
+                <th>Leave   </th>
+                <th></th>
+                <th>Number of leaves</th>
+              </tr>
+              <tr>
+                <td>
+                  Sick
+                </td>
+                <td></td>
+                <td>
+                  {{sick_leave}}
+                </td>
+              </tr>  
+              <tr>
+                <td>
+                  Casual
+                </td>
+                <td></td>
+                <td>
+                  {{casual_leave}}
+                </td>
+              </tr> 
+              <tr>
+                <td>
+                  Annual  
+                </td>
+                <td></td>
+                <td>
+                  {{annual_leave}}
+                </td>
+              </tr>             
+            </table></div>
+              
+          </div>
+          <div class="section"></div>
+        </div>
+        <a href='/manager/employeeviewstatus'>
+          <div class="overlap-group-wrapper">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">Employees Status</div>
+              <div class="text-wrapper-5">See all details of employees and their active status</div>
+              <img class="img" src="/static/img/etms.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/manager/adddepandpro'>
+          <div class="positivity-rate">
+            <div class="overlap-6">
+              <div class="text-wrapper-8">Assign Dept</div>
+              <div class="text-wrapper-9">Assign project name and Department name to employee</div>
+              <img class="ellipse-4" src="/static/img/attendance.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/manager/mgrfeedbackview'>
+          <div class="positivity-rate-2">
+            <div class="overlap-6">
+              <div class="text-wrapper-8">View Feedbacks</div>
+              <div class="text-wrapper-9">View Feedbacks Sent By Employees</div>
+              <img class="ellipse-4" src="/static/img/feedback.svg" />
+            </div>
+          </div>
+        </a>
+        <a href='/manager/mgrrequestsview'>
+          <div class="vaccine-administered-2">
+            <div class="overlap-4">
+              <div class="text-wrapper-4">View Requests</div>
+              <div class="text-wrapper-5">View Requests Sent By Employees</div>
+              <img class="img" src="/static/img/source.svg" />
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load google charts
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      // Draw the chart and set the chart values
+      function drawChart() {
+        const casual = {{casual_leave | safe}}
+        const annual = {{annual_leave | safe}}
+        const sick = {{sick_leave | safe}}
+        var data = google.visualization.arrayToDataTable([
+        ['Leave Type', 'Leaves'],
+        ['Casual', casual],
+        ['Annual', annual],
+        ['Sick', sick]  
+      ]);
+      
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Leaves', 'width':380, 'height':300};
+      
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      </script>
+  </body>
+</html>
+
+
+
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRWhiz</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS (optional) -->
+   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg shadow-sm">
+     <a href="/manager/profile/"><img class="icon img-fluid rounded-circle" src="/static/img/people-profile-graphic_24911-21373.jpg.avif" /></a> 
+        <div class="container">
+            <a class="navbar-brand" href="/employee/">HRWhiz</a>       
+
+                
+                      <ul class="navbar-nav ms-auto">
+                         
+                          <div>
+                          <ul class="navbar-nav row fw-bold" style="padding-right: 2rem">{{name}}</ul>
+                          <ul class="navbar-nav row " style="padding-right: 2rem">{{designation}}</ul>
+                          </div>
+                        <a class="nav-link" href="/logout/">
+                        <img class="nav-icon"  src="/static/img/sign-out-2-svgrepo-com.svg" /></a>
+              
+                </ul>
+            </div>
+        </div>
+    </nav> 
+
+    <div class="layout">
+    <div class="row">
+      <div class="menu">
+        <div class="active"><a href="/manager/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>  
+        <div><a href="/employee/askhr"><img class="img nav-icon" src="/static/img/folder-svgrepo-com.svg" /></a></div>
+        <div><a href="/employee/feedback"><img class="img nav-icon" src="/static/img/mail-open-svgrepo-com.svg" /></a></div>
+        
+      </div>
+      </div>
+        <div class="container mt-4 content ">    
+            <h2>Welcome, {{name}}</h2>
+            <h6>{{designation}}</h6>
+
+            
+      <div class="row gap-4"  style="padding-left: 1rem; padding-right: 1rem; margin-top: -20px">
+        <div class="col" style="padding-right: 1rem;">
+                   <div class="row gap-4 mb-4">
+                            <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
+                                <div class="card-body">
+                                <img class="img" src="/static/img/askhr.png" />
+                                  <a href="/manager/sendpr" class="card-title"><h5>Performance review</h5></a>
+                                  <h6 class="card-subtitle mb-2 text-body-secondary">Give feedback to employees under you</h6>
+                                </div>
+                              </div>
+                              
+                              <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
+                                <div class="card-body">
+                                  <img class="img" src="/static/img/feedback.svg" />
+                                  <a href="/employee/feedback" class="card-title"><h5>Feedback</h5></a>
+                                  <h6 class="card-subtitle mb-2 text-body-secondary">Write a feedback</h6>
+                                </div>
+                              </div>
+                     </div>
+
+
+                      <div class="row gap-4 mb-4"> 
+                            <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
+                                <div class="card-body">                
+                                <img class="img" src="/static/img/leaves.svg" />
+                                  <a href="/employee/leaverequest" class="card-title"><h5>Apply Leaves</h5></a>
+                                  <h6 class="card-subtitle mb-2 text-body-secondary"> leaves</h6>
+                                </div>
+                              </div>
+                              
+
+                              <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
+                                <div class="card-body">                
+                                <img class="img" src="/static/img/sticky-notes-3-svgrepo-com.svg" />
+                                  <a href="/manager/employeeviewstatus" class="card-title"><h5>Employee Status</h5></a>
+                                  <h6 class="card-subtitle mb-2 text-body-secondary">Details of employees</h6>
+                                </div>
+                              </div>
+                      </div>
+        </div>
+           <div class="card col leaves-card mb-4" style="max-width: 26rem;">
+                    <div class="overlap-5">
+                      <div class="shadow"></div>
+                      <div class="base"></div>
+                      <div id="piechart"></div> 
+                      <div class="text-wrapper-leaves">
+                      <table>
+              <tr>
+                <th>Number of leaves</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      Sick
+                    </td>
+                    <td></td>
+                    <td>
+                      {{sick_leave}}
+                    </td>
+                  </tr>  
+                  <tr>
+                    <td>
+                      Casual
+                    </td>
+                    <td></td>
+                    <td>
+                      {{casual_leave}}
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td>
+                      Annual  
+                    </td>
+                    <td></td>
+                    <td>
+                      {{annual_leave}}
+                    </td>
+                  </tr>             
+                </table></div>
+                   
+                        
+                    </div>
+                  
+              </div>   
+        </div>
+        <div class="row gap-4" style="padding-left: 1rem; padding-right: 1rem;" >
+
+            <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
+                  <div class="card-body">
+                    <img class="img" src="/static/img/attendance.svg" />
+                    <a href="/manager/assignprodept" class="card-title"><h5>Assign Department</h5></a>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Projects and departments</h6>
+                  </div>
+                </div> 
+              <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
+                  <div class="card-body">
+                  <img class="img" src="/static/img/note-alert-svgrepo-com.svg" />
+                    <a href="/manager/mgrfeedbackview" class="card-title"><h5>View Feedbacks</h5></a>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Feedbacks from employees</h6>
+                  </div>
+                </div>
+                <div class="card col shadow-sm" style="max-width: 26rem; padding: 2.5rem;">
+                  <div class="card-body">
+                  <img class="img" src="/static/img/phone-book-svgrepo-com.svg" />
+                    <a href="/manager/mgrrequestsview" class="card-title"><h5>View Requests</h5></a>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Leave requests of employees</h6>
+                  </div>
+                </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JavaScript and dependencies (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      let menu_btns = document.querySelectorAll(".menu > div")
+      menu_btns.forEach(btn => btn.addEventListener("click", () => {
+        menu_btns.forEach(el => el.classList.remove("active"))
+        btn.classList.add("active")
+      }))
+    </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load google charts
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      // Draw the chart and set the chart values
+      function drawChart() {
+        const casual = {{casual_leave | safe}}
+        const annual = {{annual_leave | safe}}
+        const sick = {{sick_leave | safe}}
+        var data = google.visualization.arrayToDataTable([
+        ['Leave Type', 'Leaves'],
+        ['Casual', casual],
+        ['Annual', annual],
+        ['Sick', sick]  
+      ]);
+      
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Leaves', 'width':280, 'height':200};
+      
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      </script>
+</body>
+
+</html>

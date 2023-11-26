@@ -1,0 +1,130 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>EDIT</p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required value ={{name}}><br><br>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required value ={{password}}><br><br>
+
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required value={{email}}><br><br>
+
+        <label for="address">address</label>
+        <input type="address" id="address" name="address" required value={{address}}><br><br>
+
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone_number" required value ={{phone_number}}><br><br>        
+
+        <input type="submit" value="Submit" id="submit" style="display:none;">
+    </form>
+    <script>
+        let form = document.querySelector("form")
+        let inputs = form.querySelectorAll("input")
+        let btn = form.querySelector("p")
+        const change = (bool) => {
+            if(bool) inputs.forEach(input => input.setAttribute("readonly", true))
+            else inputs.forEach(input => input.removeAttribute("readonly"))
+        }
+        change(true)
+        btn.addEventListener("click", () => {
+            change(false)
+            form.querySelector("#submit").style.display = "block"
+        })
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+      
+    <div class="container mt-5">
+        <div class="text-end mb-3">
+            <button class="btn btn-primary" id="editBtn">Edit</button>
+        </div>
+        <form id="profileForm" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value={{name}} readonly>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="text" class="form-control" id="password" name="password" value={{password}} readonly>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value={{email}} readonly>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address:</label>
+                <input type="text" class="form-control" id="address" name= "address" value={{address}} readonly>
+            </div>
+            
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">phone_number</label>
+                <input type="number" class="form-control" id="phone_number" name="phone_number" value={{phone_number}} readonly>
+            </div>
+            <button class="btn btn-primary" id="submit" style="display: none;">Save</button>
+            <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">Cancel</button>
+        </form>
+    </div>
+    </div>
+<!-- Bootstrap JavaScript and dependencies (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+<script>
+    document.getElementById("editBtn").addEventListener("click", function() {
+        document.getElementById("name").readOnly = false;
+        document.getElementById("password").readOnly = false;
+        document.getElementById("email").readOnly = false;
+        document.getElementById("address").readOnly = false;
+        document.getElementById("phone_number").readOnly = false;
+        document.getElementById("submit").style.display = "block";
+        document.getElementById("cancelBtn").style.display = "block";
+        document.getElementById("editBtn").style.display = "none";
+    });
+
+    document.getElementById("cancelBtn").addEventListener("click", function() {
+        document.getElementById("name").readOnly = true;
+        document.getElementById("password").readOnly = true;
+        document.getElementById("email").readOnly = true;
+        document.getElementById("address").readOnly = true;
+        document.getElementById("phone_number").readOnly = true;
+        document.getElementById("saveBtn").style.display = "none";
+        document.getElementById("cancelBtn").style.display = "none";
+        document.getElementById("editBtn").style.display = "block";
+    });
+
+     let menu_btns = document.querySelectorAll(".menu > div")
+  menu_btns.forEach(btn => btn.addEventListener("click", () => {
+    menu_btns.forEach(el => el.classList.remove("active"))
+    btn.classList.add("active")
+  }))
+</script>
+
+   
+</body>
+
+</html>

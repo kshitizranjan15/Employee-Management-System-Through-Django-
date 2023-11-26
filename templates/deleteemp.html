@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRWhiz</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS (optional) -->
+   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg shadow-sm">
+    <img class="icon img-fluid rounded-circle"  src="/static/img/people-profile-graphic_24911-21373.jpg.avif" />
+        <div class="container">
+            {% if designation == 'Manager' %}
+      <a class="navbar-brand" href="/manager/">HRWhiz</a>       
+      {% endif %}
+      {% if designation == 'Employee' %}
+      <a class="navbar-brand" href="/employee/">HRWhiz</a>       
+      {% endif %}
+      {% if designation == 'HR' %}
+      <a class="navbar-brand" href="/HR/">HRWhiz</a>       
+      {% endif %} 
+            <div class="collapse navbar-collapse"  id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                        <div>
+                          <ul class="navbar-nav row fw-bold" style="padding-right: 2rem">{{name}}</ul>
+                          <ul class="navbar-nav row " style="padding-right: 2rem">{{designation}}</ul>
+                        </div>                
+                        <a class="nav-link" href="/login/">
+                        <img class="nav-icon"  src="/static/img/sign-out-2-svgrepo-com.svg" /></a>
+              
+                </ul>
+            </div>
+        </div>
+    </nav> 
+
+    <div class="layout">
+    <div class="row">
+      <div class="menu">
+        <div class="active"><a href="/HR/"><img class="img" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>  
+        <div><a href="/employee/askhr"><img class="img" src="/static/img/folder-svgrepo-com.svg" /></a></div>
+        <div><a href="/employee/feedback"><img class="img" src="/static/img/mail-open-svgrepo-com.svg" /></a></div>
+   
+    </div>
+    </div>
+    <div class="container mt-5">
+        <h2>Delete Employee</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="id">Employee ID:</label>
+            <input class="form-control mb-2"  style="max-width: 16rem" type="text" id="id" name="id" required>
+            <button type="submit" class="btn btn-secondary" style="border-radius: 0%">Cancel</button>
+            <input class="btn btn-danger" type="submit" value="Delete Employee" style="border-radius: 0px">
+        </form>
+
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

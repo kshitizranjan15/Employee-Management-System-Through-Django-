@@ -1,0 +1,190 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Feedback Form</title>
+    <style>
+        body {
+            background-color: #1b6bc740;
+            /* White background */
+            color: #333333;
+            /* Dark text */
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .illustration {
+            flex: 1;
+            padding: 20px;
+            mix-blend-mode: multiply;
+        }
+        
+        .container {
+            flex: 1;
+            border: 2px solid #c7431b50;
+            background-color: #c6625790;
+            border-radius: 10px;
+            padding: 20px;
+            margin-right: 15px;
+        }
+        
+        h1 {
+            color: #c7431b;
+        }
+        
+        input[type="text"],
+        textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        input[type="submit"] {
+            background-color: #c7431b;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.8s all;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #2c95c9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="illustration">-->
+        <!-- Placeholder for the illustration (You can add your image here) -->
+        <!-- <img src="https://i.imgur.com/yR3guNP.jpg" alt="Illustration" style="max-width: 100%" />
+    </div>
+    <div class="container">
+        <h1>Feedback Form</h1>
+        <form method="post">
+            {% csrf_token %} {{ form.as_p }}-->
+
+            <!-- Your form fields -->
+            <!-- <label for="{{ form.fed_to.id_for_label }}">Feedback To:</label><br />
+            <select id="{{ form.fed_to.id_for_label }}" name="selection-value">
+                <option value="manage"> Manager  </option>
+                <option value="hr"> HR </option>
+                {% if designation == 'Manager' %}
+                <option value="employee"> Employee </option>
+                {% endif %}
+
+            </select>
+            <br /><br />
+            {% comment %} <label for="feedback_to">Feedback To:</label><br />
+            <input type="text" id="feedback_to" name="feedback_to" /><br /><br /> {% endcomment %}
+
+            <label for="description">Description:</label><br />
+            <textarea  type="text" id="reason" name="description" style="resize:none; height:80px;" required></textarea><br /><br />
+        <br /><br />
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+ </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback form</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS (optional) -->
+   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg shadow-sm">
+     <a href="/profile/"><img class="icon img-fluid rounded-circle" src="/static/img/people-profile-graphic_24911-21373.jpg.avif" /></a> 
+        <div class="container">
+            {% if designation == 'Manager' %}
+      <a class="navbar-brand" href="/manager/">HRWhiz</a>       
+      {% endif %}
+      {% if designation == 'Employee' %}
+      <a class="navbar-brand" href="/employee/">HRWhiz</a>       
+      {% endif %}
+      {% if designation == 'HR' %}
+      <a class="navbar-brand" href="/HR/">HRWhiz</a>       
+      {% endif %}       
+
+                
+                      <ul class="navbar-nav ms-auto">
+                         
+                          <div>
+                          <ul class="navbar-nav row fw-bold" style="padding-right: 2rem">{{name}}</ul>
+                          <ul class="navbar-nav row " style="padding-right: 2rem">{{designation}}</ul>
+                          </div>
+                        <a class="nav-link" href="/logout/">
+                        <img class="nav-icon"  src="/static/img/sign-out-2-svgrepo-com.svg" /></a>
+              
+                </ul>
+            </div>
+        </div>
+    </nav> 
+
+    <div class="layout">
+    <div class="row">
+      <div class="menu">
+        <div><a href="/employee/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>  
+        <div><a href="/employee/askhr"><img class="img nav-icon" src="/static/img/folder-svgrepo-com.svg" /></a></div>
+        <div class="active"><a href="/employee/feedback"><img class="img nav-icon" src="/static/img/mail-open-svgrepo-com.svg" /></a></div>
+        
+      </div>
+      </div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Feedback Form</h2>
+        <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+
+            <div class="mb-3">
+                    <label for="{{ form.fed_to.id_for_label }}">Feedback to:</label>
+                    <select class="form-control" id="{{ form.fed_to.id_for_label }}" name="selection-value"  style="width: 16rem">
+                        <!-- Add employee names dynamically here -->
+                        <option value="Manager">Manager</option>
+                        <option value="HR">HR</option>
+                        {% if designation == 'Manager' %}
+                        <option value="Employee"> Employee </option>
+                        {% endif %}
+                    </select>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea class="form-control" id="description" id="reason" name="description" rows="5" placeholder="Enter your feedback"></textarea>
+            </div>
+            <a href="/employee" type="cancel" class="btn btn-light" style="border-radius: 0%">Cancel</a>
+            <button type="submit" class="btn btn-light custom-button" value="Submit">Submit</button>
+        </form>
+    </div>
+    </div>
+
+    <!-- Bootstrap JavaScript and dependencies (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      let menu_btns = document.querySelectorAll(".menu > div")
+      menu_btns.forEach(btn => btn.addEventListener("click", () => {
+        menu_btns.forEach(el => el.classList.remove("active"))
+        btn.classList.add("active")
+      }))
+    </script>
+</body>
+
+</html>

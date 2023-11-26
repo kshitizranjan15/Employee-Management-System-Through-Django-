@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS (optional) -->
+   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg shadow-sm">
+    {% if designation == "Manager" %}
+     <a href="/manager/profile/"><img class="icon img-fluid rounded-circle" src="/static/img/people-profile-graphic_24911-21373.jpg.avif" /></a> 
+    {% elif designation == "Employee" %}
+     <a href="/employee/profile/"><img class="icon img-fluid rounded-circle" src="/static/img/people-profile-graphic_24911-21373.jpg.avif" /></a> 
+    {% elif  designation  == "HR" %}
+     <a href="/HR/profile/"><img class="icon img-fluid rounded-circle" src="/static/img/people-profile-graphic_24911-21373.jpg.avif" /></a> 
+    {% endif %}
+
+
+        <div class="container">
+            
+            {% if designation == "Manager" %}
+            <a class="navbar-brand" href="/manager/">HRWhiz</a>   
+
+            {% elif designation == "Employee" %}
+            <a class="navbar-brand" href="/employee/">HRWhiz</a>   
+
+            {% elif  designation  == "HR" %}
+            <a class="navbar-brand" href="/HR/">HRWhiz</a>   
+            {% endif %}
+
+                      <ul class="navbar-nav ms-auto">
+                         
+                          <div>
+                          <ul class="navbar-nav row fw-bold" style="padding-right: 2rem">{{name}}</ul>
+                          <ul class="navbar-nav row " style="padding-right: 2rem">{{designation}}</ul>
+                          </div>
+                        <a class="nav-link" href="/logout/">
+                        <img class="nav-icon"  src="/static/img/sign-out-2-svgrepo-com.svg" /></a>
+                </ul>
+            </div>
+        </div>
+    </nav> 
+
+    <div class="layout">
+    <div class="row">
+      <div class="menu">
+        <div><a href="/employee/"><img class="img nav-icon" src="/static/img/home-alt-3-svgrepo-com.svg" /></a></div>  
+        <div><a href="/employee/askhr"><img class="img nav-icon" src="/static/img/folder-svgrepo-com.svg" /></a></div>
+        <div><a href="/employee/feedback"><img class="img nav-icon" src="/static/img/mail-open-svgrepo-com.svg" /></a></div>
+        
+      </div>
+      </div>
+      
+    <div class="container mt-5">
+        <!-- First Row: Profile Picture -->
+        <div class="row mt-3 mb-4">
+            <div class="col-12 text-center d-flex justify-content-center align-items-center">
+                <img src="/static/img/people-profile-graphic_24911-21373.jpg.avif" class="img-fluid rounded-circle custom-image" alt="Profile Picture">
+            </div>
+        </div>
+
+        <!-- Second Row: Details and Graph Card -->
+        <div class="row" style="padding-top: 3rem">
+            <!-- First Column: Details -->
+            <div class="col-md-6">
+            
+                <h3>Employee Details</h3>
+                 <div class="text-end mb-3">
+                  <button class="btn btn-light custom-button" id="editBtn">Edit</button>
+                </div>
+                
+        <form id="profileForm" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{name}}" maxlength="50" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="text" class="form-control" id="password" name="password" value="{{password}}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{email}}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address:</label>
+                <input type="text" class="form-control" id="address" name= "address" value="{{address}}" readonly>
+            </div>
+            
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">phone_number</label>
+                <input type="number" class="form-control" id="phone_number" name="phone_number" value="{{phone_number}}" readonly>
+            </div>
+            <div class="row" style="width: 12rem">
+            <a href="/employee/profile/" type="button" class="btn btn-light col" id="cancelBtn" style="border-radius: 0%; display: none;">Cancel</a>
+            <button class="btn btn-light custom-button col" id="submit" style="display: none;">Save</button>
+            <div>
+        </form>
+                
+        </div>
+    </div>   
+    </div>
+
+ <div class="col-md-6" style="padding-left: 9rem; padding-right: 3rem; min-width:24rem">
+                <div class="card ">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Leaves distribution chart:</h5>
+                        <!-- Add your graph or chart here -->
+                        <div class="leaves-card" >
+                    <div class="overlap-5">
+                      <div class="shadow"></div>
+                      <div class="base"></div>
+                      <div id="piechart"></div> 
+                      <div class="text-wrapper-leaves">
+
+                      <table>
+              <tr>
+                <th>Number of leaves</th>
+            </tr>
+              <tr>
+                <td>
+                  Sick
+                </td>
+                <td></td>
+                <td>
+                  {{sick_leave}}
+                </td>
+              </tr>  
+              <tr>
+                <td>
+                  Casual
+                </td>
+                <td></td>
+                <td>
+                  {{casual_leave}}
+                </td>
+              </tr> 
+              <tr>
+                <td>
+                  Annual  
+                </td>
+                <td></td>
+                <td>
+                  {{annual_leave}}
+                </td>
+              </tr>             
+            </table></div>
+                
+   
+                        <div id="graph" style="height: 60px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Bootstrap JavaScript and dependencies (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>    
+    <script>
+        document.getElementById("editBtn").addEventListener("click", function() {
+            document.getElementById("name").readOnly = false;
+            document.getElementById("password").readOnly = false;
+            document.getElementById("email").readOnly = false;
+            document.getElementById("address").readOnly = false;
+            document.getElementById("phone_number").readOnly = false;
+            document.getElementById("submit").style.display = "block";
+            document.getElementById("cancelBtn").style.display = "block";
+            document.getElementById("editBtn").style.display = "none";
+        });
+
+        document.getElementById("cancelBtn").addEventListener("click", function() {
+            document.getElementById("name").readOnly = true;
+            document.getElementById("password").readOnly = true;
+            document.getElementById("email").readOnly = true;
+            document.getElementById("address").readOnly = true;
+            document.getElementById("phone_number").readOnly = true;
+            document.getElementById("saveBtn").style.display = "none";
+            document.getElementById("cancelBtn").style.display = "none";
+            document.getElementById("editBtn").style.display = "block";
+        });
+
+        let menu_btns = document.querySelectorAll(".menu > div")
+    menu_btns.forEach(btn => btn.addEventListener("click", () => {
+        menu_btns.forEach(el => el.classList.remove("active"))
+        btn.classList.add("active")
+    }))
+    </script>
+
+
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load google charts
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      
+      // Draw the chart and set the chart values
+      function drawChart() {
+        const casual = {{casual_leave | safe}}
+        const annual = {{annual_leave | safe}}
+        const sick = {{sick_leave | safe}}
+        var data = google.visualization.arrayToDataTable([
+        ['Leave Type', 'Leaves'],
+        ['Casual', casual],
+        ['Annual', annual], 
+        ['Sick', sick]  
+      ]);
+      
+        // Optional; add a title and set the width and height of the chart
+        var options = {'title':'Leaves', 'width':290, 'height':200};
+      
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+      </script>
+</body>
+
+</html>
